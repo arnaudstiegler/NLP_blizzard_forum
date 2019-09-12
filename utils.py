@@ -70,7 +70,9 @@ def scrape_thread(thread_url, multiprocessing_bucket=None):
                     thread.append(processed_text)
             fp.close()
             i+=1
-        except:
+        except Exception as e:
+            if(e != "HTTP Error 404: Not Found"):
+                logging.warning("Exception in while loop of scrape_thread: {}".format(e))
             searching=False
 
     logging.info("Scraping: %s", thread_url)

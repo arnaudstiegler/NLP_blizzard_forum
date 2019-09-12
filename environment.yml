@@ -17,3 +17,5 @@ dependencies:
   - pip:
     - tqdm
     - sklearn
+    - spacy
+    - gensim
