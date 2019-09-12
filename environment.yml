@@ -1,0 +1,19 @@
+name: forum_scraping
+
+channels:
+  - conda-forge
+  - ioam
+  - soumith
+dependencies:
+  - python=3.6
+  - beautifulsoup4
+  - numpy
+  - jupyter
+  - pandas
+  - matplotlib
+  - seaborn
+  - nb_conda
+  - pip
+  - pip:
+    - tqdm
+    - sklearn
