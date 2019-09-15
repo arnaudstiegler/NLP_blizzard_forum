@@ -3,9 +3,24 @@ from bs4 import BeautifulSoup
 import re
 import multiprocessing as mp
 import logging
+import json
 
 
-#Stream to file ?
+def json_dump(filename, data, thread_name_list, url_list):
+    json_data=[]
+
+    for i in range(len(data)):
+        print(thread_name_list[i])
+        json_data.append({
+            'url': url_list[i],
+            'thread_name': thread_name_list[url_list.index(data[i][0])],
+            'init_post': data[i][1][0],
+            'comments': data[i][1][1:]
+        })
+    with open('data/threads_new_process.json', 'w') as outfile:
+        json.dump(json_data, outfile, indent=4, ensure_ascii=False)
+
+    return
 
 
 #Using more than 2 processes leads to empty request from urllib
@@ -50,11 +65,15 @@ def scrape_thread(thread_url, multiprocessing_bucket=None):
             #for emojis
             to_remove += list(soup.find_all('img', {'class':'emoji'}))
             #for gif
-            to_remove += list(soup.find_all('a', {'class':"onebox"}))
+            to_remove += list(soup.find_all('a'))
+            #for code
+            to_remove += list(soup.find_all('code'))
             #for comments on previous answers
             temp = list(soup.find_all('aside'))
             comments += len(temp)
             to_remove+=temp
+            #For hashtags
+            to_remove += list(soup.find_all('span', {'class':'hashtag'}))
 
             for elem in to_remove:
                 elem.extract()
@@ -79,10 +98,15 @@ def scrape_thread(thread_url, multiprocessing_bucket=None):
     logging.info("There are %s pages for the thread", i)
     logging.info('There are %s comments for this thread',len(thread))
     logging.info('There are %s answers to comments for this tread',comments)
+
+    ### The reason for returning both the thread and the thread url is that
+    ### because of the multiprocessing, the list of threads might not be following
+    ### the same order as the list of urls so we use the thread_url as an id
+
     if(multiprocessing_bucket is None):
-        return thread
+        return (thread_url,thread)
     else:
-        multiprocessing_bucket.append(thread)
+        multiprocessing_bucket.append((thread_url,thread))
 
 def retrieve_thread_url(number_thread=50):
     ###Finding the top yearly threads
