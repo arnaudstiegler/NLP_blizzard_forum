@@ -10,14 +10,13 @@ def json_dump(filename, data, thread_name_list, url_list):
     json_data=[]
 
     for i in range(len(data)):
-        print(thread_name_list[i])
         json_data.append({
             'url': url_list[i],
             'thread_name': thread_name_list[url_list.index(data[i][0])],
             'init_post': data[i][1][0],
             'comments': data[i][1][1:]
         })
-    with open('data/threads_new_process.json', 'w') as outfile:
+    with open(filename, 'w') as outfile:
         json.dump(json_data, outfile, indent=4, ensure_ascii=False)
 
     return
