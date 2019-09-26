@@ -136,3 +136,13 @@ def retrieve_thread_url(number_thread=50):
             searching=False
 
     return url_list, thread_name_list
+
+
+if __name__ == '__main__':
+	import pandas as pd
+
+	#Scrape the list of urls from the website
+	url_list, thread_name_list = utils.retrieve_thread_url(number_thread = 10000)
+	data = utils.scrape_thread_multiprocessing(url_list,num_process=2)
+
+	utils.json_dump('data/10000_posts.json', data, thread_name_list, url_list)
