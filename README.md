@@ -33,5 +33,5 @@ Here are some interesting samples from what the model can output once it has bee
 
 We can see that the model has successfully captured some words that are specific to the game, and it uses them successfully: for instance "PVE" stands for player vs environment and is a very important component of the game. Similarly, it has captured some aspects of the games such as "mythic dungeons" or "raids". It has even learned that "monk" is a class of the game that you can play. The second interesting point is that the model has completely captured the general tone of the forum where people debate over aspects of the game and try to point out some of its weak points.
 
-Of course, those examples were among the best: the model also ouputs a lot of unintelligible sentences. A bigger set of samples can be found in `gpt2_experiments/generation_samples/`. The weights for the trained model are located in  the `/gpt2_experiments/` folder, along with the notebook by Max Wolf that was used.
+Of course, those examples were among the best: the model also ouputs a lot of unintelligible sentences. A bigger set of samples can be found in `gpt2_experiments/generation_samples/`. The notebook by Max Wolf that was used is located in the `/gpt2_experiments/` folder, but the weights cannot be uploaded because of the size of the file.
 
