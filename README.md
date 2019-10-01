@@ -36,6 +36,7 @@ It is interesting to see that the different WOW expansions have very different s
 
 **Game Features** 
 Here are some of the sentiment scores for aspects of the game:
+
 | Token    | Sentiment Score |
 |----------|-----------------|
 | pvp      | -0.015          |
