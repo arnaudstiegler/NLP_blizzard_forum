@@ -14,17 +14,40 @@ The goal of this repository is to figure out whether we could create insights fr
 
 ## Sentiment Analysis on Forum Posts
 
-Using Google Cloud Natural Language features, we did a sentiment analysis of the top-100 most actives posts: for each document (made of the inital post and all the answers), we extracted the sentiment score. We also extracted a sentiment score on the word level for each document, and aggregated the score to get an overall sentiment score for each word.
+Using Google Cloud Natural Language features, we did a sentiment analysis of the top-200 most actives posts: for each document (made of the inital post and all the answers), we extracted the sentiment score. We also extracted a sentiment score on the word level for each document, and aggregated the score to get an overall sentiment score for each word.
 
 **The average sentiment score over the documents is -0.067** which indicates that the average sentiment is rather negative. However, the value is still very close to 0 which rather shows that there are mixed feelings among the posts. This score seems to correspond to the fact that although people do complain about the game, most of the posts aim at improving the game by providing feedback and are not only written to express dissatisfaction.
 
-The top-10 most positive words are:
-['fun','Classic','zones','example','class','power','games','life','ability','gear']
-The top-10 most negative words are:
-['problem','damage','issues','nothing','issue','People','Alliance','post',Blizzard','blizzard']
-The results are interesting: "Classic" and 'classic' are among the top-10 most positive words within the posts which shows the enthusiasm of the players for the newly launched Classic WOW game. On the contrary, Blizzard has a very low score (you can actually find the occurence of Blizzard twice in the bottom 10 words).
+**Expansion popularity** 
+Here is the sentiment score for each expansion of the game
 
-Besides, it is interesting to note that 'zones', 'gear', 'class' have very high scores as well, which might indicte that those elements are the most-liked features of the game.
+| Token     | Expansion Name         | Sentiment Score |
+|-----------|------------------------|-----------------|
+| bfa       | Battle For Azeroth     | -0.22           |
+| legion    | Legion                 | -0.059          |
+| wod       | Warlords of Draenor    | 0.22            |
+| cataclysm | Cataclysm              | 0.029           |
+| mop       | Mists of Pandaria      | 0.10            |
+| woltk     | Wrath of the Lich King | 0.052           |
+| tbc       | The Burning Crusade    | -0.017          |
+| vanilla   | World Of Warcraft      | -0.018          |
+
+It is interesting to see that the different WOW expansions have very different sentiment score. Classic wow has the highest sentiment score which seems consistent with the current success of the game. On the contrary, the current extension ('bfa') has quite a low sentiment score. There seems to be a pattern where the intermediary expansions have a positive sentiment score, and the oldest and most recent expansions have a negative sentiment score.
+
+**Game Features** 
+Here are some of the sentiment scores for aspects of the game:
+| Token    | Sentiment Score |
+|----------|-----------------|
+| pvp      | -0.015          |
+| pve      | 0.035           |
+| leveling | 0.035           |
+| raid     | -0.016          |
+| dungeon  | -0.004          |
+| azerite  | -0.23           |
+
+'pve' (which stands for player vs environment) and 'leveling' have a very high sentiment score and it is consistent with the fact that those are elements that have been quite positively judged by players. On the contrary, 'azerite' has a very low sentiment score: it is a very controversial aspect of the game right now (azerite is some sort of currency for progress within the game).
+
+*Sentiment scores are no ground-truth when it comes to capturing general patterns. However, it is interesting to see that we can capture some of the current debated aspects of the game. Besides, even though the information conveyed by the absolute value of those sentiment scores can be debated, it could be interesting to track the evolution of those score over time to see how the general opinion on the forums changes*
 
 ## Latent-Dirichlet Allocation
 
